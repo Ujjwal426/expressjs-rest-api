@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-
+import statusCodes from '../constants/HttpStatusCode'
 let users = [];
 
 // get all users
@@ -26,7 +26,7 @@ export const getUser = (req, res) => {
     const { id } = req.params;
     const foundUser = users.find((user) => user.ID == id);
     if (!foundUser) {
-        res.status(404);
+        res.status(statusCodes.NOT_FOUND);
         res.send({
             data: null,
             message: 'User Not Found'
@@ -55,7 +55,7 @@ export const updateUser = (req, res) => {
 
     const userToBeUpdated = users.find((user) => user.ID == id);
     if(!userToBeUpdated){
-        res.status(404);
+        res.status(statusCodes.NOT_FOUND);
         res.send({
             data: null,
             message: 'User Not Found'
